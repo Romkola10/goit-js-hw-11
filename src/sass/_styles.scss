@@ -1,0 +1,116 @@
+body {
+    background-color: #e6e7f2;
+}
+
+.wrapper {
+    z-index: 1;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: #1054ca;
+    margin: 0 auto;
+    padding: 30px;
+    position: sticky;
+    top: 0;
+    box-shadow: rgba(89, 89, 243, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+
+
+
+.submit {
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 150px;
+    background-color: #eaa838;
+    cursor: pointer;
+}
+
+.submit:hover,
+.submit:focus {
+    background-color:  #85bea9;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+
+.search-input {
+    padding: 10px;
+    margin-right: 30px;
+    border-radius: 10px;
+    background-color: #eaa838;
+
+}
+
+.btn {
+    display: flex;
+    justify-content: space-around;
+}
+
+.load-more {
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 150px;
+    background-color: #eaa838;
+    ;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.load-more:hover,
+.load-moret:focus { 
+    background-color: #85bea9;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+}
+
+.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.gallery {
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    justify-content: center;
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.photo-card {
+    box-sizing: border-box;
+    height: 400px;
+    width: calc((100% - 4 * 30px) / 4);
+    margin: 15px;
+    border-radius: 2px 2px 6px 6px;
+    border: 1px solid #eaa838;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.img-container {
+    height: 75%;
+}
+
+.img {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.info {
+    background-color: #dbe0f2;
+    justify-content: space-around;
+    padding: 10px;
+    font-size: 16px;
+    display: flex;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 8px;
+
+}
