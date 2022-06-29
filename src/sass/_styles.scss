@@ -68,6 +68,11 @@ body {
     visibility: hidden;
 }
 
+.visible {
+        opacity: 100;
+        visibility: visible;
+}
+
 .gallery {
     box-sizing: border-box;
     flex-wrap: wrap;

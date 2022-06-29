@@ -9,11 +9,13 @@ const refs = {
   loadBtn: document.querySelector('.load-more'),
   searchBtn: document.querySelector('.search-btn'),
 };
+
 const photoApiService = new PhotoApiService();
 
 refs.form.addEventListener('submit', onSearch);
 refs.gallery.addEventListener('click', onImageClick);
 refs.loadBtn.addEventListener('click', onLoadMore);
+refs.loadBtn.classList.add('is-hidden');
 
 function onSearch(e) {
   e.preventDefault();
@@ -25,23 +27,34 @@ function onSearch(e) {
     .fetchPhotos()
     .then(data => {
       if (data.hits.length === 0) {
-        refs.loadBtn.classList.add('is-hidden');
         Notify.failure(
           `Sorry, there are no images matching your search query. Please try again.`
         );
         return;
       }
       if (photoApiService.query === '') {
-        refs.loadBtn.classList.add('is-hidden');
         return Notify.warning(
           'Please, fill in the search field and try again.'
         );
-      } else {
-        data.hits.forEach(createGalleryItemMarkup);
-        refs.loadBtn.classList.remove('is-hidden');
       }
+      if (data.total > 40) {
+        refs.loadBtn.classList.remove('is-hidden');
+        refs.loadBtn.classList.add('visible');
+         data.hits.forEach(createGalleryItemMarkup);
+        
+      }
+      if (data.total < 40) {
+         refs.loadBtn.classList.remove('visible');
+        refs.loadBtn.classList.add('is-hidden');
+        data.hits.forEach(createGalleryItemMarkup);
+        Notify.failure(
+          `We're sorry, but you've reached the end of search results.`
+        );
+      }
+      refs.loadBtn.classList.reset();
     })
     .catch(error => console.log(error));
+  
 }
 
 function onLoadMore(e) {
@@ -49,12 +62,12 @@ function onLoadMore(e) {
   photoApiService
     .fetchPhotos()
     .then(data => {
-      if (data.hits.length === 0) {
-        refs.loadBtn.classList.add('is-hidden');
-
+      if (data.total === 0) {
         Notify.failure(
           `We're sorry, but you've reached the end of search results.`
         );
+        refs.loadBtn.classList.add('is-hidden');
+        refs.loadBtn.classList.remove('visible');
         return;
       }
       if (photoApiService.query === '') {
