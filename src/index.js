@@ -19,7 +19,6 @@ refs.loadBtn.classList.add('is-hidden');
 
 function onSearch(e) {
   e.preventDefault();
-
   photoApiService.query = e.currentTarget.elements.searchQuery.value;
   photoApiService.resetPage();
   refs.gallery.innerHTML = '';
@@ -51,7 +50,6 @@ function onSearch(e) {
           `We're sorry, but you've reached the end of search results.`
         );
       }
-      refs.loadBtn.classList.reset();
     })
     .catch(error => console.log(error));
   
@@ -59,9 +57,11 @@ function onSearch(e) {
 
 function onLoadMore(e) {
   e.preventDefault();
+  this.page += 1;
   photoApiService
     .fetchPhotos()
     .then(data => {
+      
       if (data.total === 0) {
         Notify.failure(
           `We're sorry, but you've reached the end of search results.`
@@ -70,11 +70,15 @@ function onLoadMore(e) {
         refs.loadBtn.classList.remove('visible');
         return;
       }
-      if (photoApiService.query === '') {
-        return Notify.warning(
-          'Please, fill in the search field and try again.'
+      if (data.hits.length < 40) {
+         refs.loadBtn.classList.remove('visible');
+        refs.loadBtn.classList.add('is-hidden');
+        data.hits.forEach(createGalleryItemMarkup);
+        Notify.failure(
+          `We're sorry, but you've reached the end of search results.`
         );
-      } else {
+      }
+      else {
         data.hits.forEach(createGalleryItemMarkup);
         onImageClick();
       }

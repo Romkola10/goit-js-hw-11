@@ -25,7 +25,6 @@ export default class PhotoApiService {
             .then(data => {
                 console.log(data);
                 this.page += 1;
-                console.log(data);
                 return data.data;
              });
     }
