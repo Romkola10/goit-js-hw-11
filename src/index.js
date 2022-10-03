@@ -10,6 +10,7 @@ const refs = {
   searchBtn: document.querySelector('.search-btn'),
 };
 
+
 const photoApiService = new PhotoApiService();
 
 refs.form.addEventListener('submit', onSearch);
@@ -26,6 +27,8 @@ function onSearch(e) {
     .fetchPhotos()
     .then(data => {
       if (data.hits.length === 0) {
+        refs.loadBtn.classList.remove('visible');
+        refs.loadBtn.classList.add('is-hidden');
         Notify.failure(
           `Sorry, there are no images matching your search query. Please try again.`
         );
@@ -122,7 +125,7 @@ function onImageClick(e) {
   e.preventDefault();
   let galleryCard = new SimpleLightbox('.img-container a', {
     captionDelay: 250,
-  });
+  })
   galleryCard.refresh();
   refs.gallery.addEventListener('click', galleryCard);
 }
