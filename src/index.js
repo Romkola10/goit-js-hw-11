@@ -10,11 +10,13 @@ const refs = {
   searchBtn: document.querySelector('.search-btn'),
 };
 
+  let galleryCard = new SimpleLightbox('.img-container a', {
+    captionDelay: 250,
+  })
 
 const photoApiService = new PhotoApiService();
 
 refs.form.addEventListener('submit', onSearch);
-refs.gallery.addEventListener('click', onImageClick);
 refs.loadBtn.addEventListener('click', onLoadMore);
 refs.loadBtn.classList.add('is-hidden');
 
@@ -83,7 +85,7 @@ function onLoadMore(e) {
       }
       else {
         data.hits.forEach(createGalleryItemMarkup);
-        onImageClick();
+        galleryCard.refresh();
       }
     })
     .catch(error => console.log(error));
@@ -119,13 +121,4 @@ function createGalleryItemMarkup({
     </p>
   </div>`;
   refs.gallery.append(card);
-}
-
-function onImageClick(e) {
-  e.preventDefault();
-  let galleryCard = new SimpleLightbox('.img-container a', {
-    captionDelay: 250,
-  })
-  galleryCard.refresh();
-  refs.gallery.addEventListener('click', galleryCard);
 }
